@@ -1,6 +1,18 @@
 import Image from "next/image";
+import { linearSearch, ArrayStep } from "../examples/linearSearch"
 
 export default function Home() {
+
+   const StepArray = linearSearch(
+      [5,4,3,2,1],
+      [0],
+      "Step 1"
+    );
+
+    console.log("Message: ",ArrayStep.message);
+    console.log("Array: ",ArrayStep.array);
+    console.log("Index: ",ArrayStep.activeIndices);
+
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">

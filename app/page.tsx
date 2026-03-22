@@ -1,3 +1,4 @@
+import {ArrayStep} from "../examples/linearSearch"
 export default function Home() {
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}>
@@ -11,7 +12,7 @@ export default function Home() {
           </p>
           
           <div 
-            className="p-8 rounded-lg border"
+            className="p-8 rounded-xl border-2"
             style={{
               backgroundColor: "var(--background)",
               borderColor: "var(--border)",
@@ -21,19 +22,22 @@ export default function Home() {
               Array Structure
             </h2>
             <div className="flex gap-2 flex-wrap">
-              {[1, 2, 3, 4, 5].map((num) => (
-                <div
-                  key={num}
-                  className="w-12 h-12 flex items-center justify-center rounded border-2 font-semibold transition-all hover:scale-110"
-                  style={{
-                    backgroundColor: "var(--background)",
-                    color: "var(--primary)",
-                    borderColor: "var(--accent)",
-                  }}
-                >
-                  {num}
-                </div>
-              ))}
+              {ArrayStep.array.map((num, index) => {
+                const isActive = ArrayStep.activeIndices.includes(index);
+
+                return (
+                  <div
+                    key={`${num}-${index}`}
+                    className="w-12 h-12 flex items-center justify-center rounded-xl border-2 font-semibold transition-all hover:scale-110"
+                    style={{
+                      borderColor: isActive ? "var(--primary)" : "var(--border)",
+                      color: "var(--primary)",
+                    }}
+                  >
+                    {num}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

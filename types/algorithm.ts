@@ -3,4 +3,5 @@ export type Step = {
     activeIndices: number[];
     message: string;
     target: number;
+    isMatched: boolean
 }

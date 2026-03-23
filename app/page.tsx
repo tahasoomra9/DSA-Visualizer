@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { linearSearchGenerator } from "../examples/linearSearch";
+import { Button } from "@/components/ui/button"
+
 
 export default function Home() {
   const sampleArray = useMemo(() => [8, 3, 12, 7, 20, 5], []);
@@ -31,7 +33,7 @@ export default function Home() {
           </p>
 
           <div className="mb-6 flex flex-wrap items-center gap-3 cursor-pointer">
-            <button
+            <Button
               type="button"
               onClick={handlePrev}
               disabled={stepIndex === 0}
@@ -43,8 +45,8 @@ export default function Home() {
               }}
             >
               Previous
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
               onClick={handleNext}
               disabled={stepIndex === steps.length - 1}
@@ -56,7 +58,7 @@ export default function Home() {
               }}
             >
               Next
-            </button>
+            </Button>
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
               Step {stepIndex + 1} of {steps.length}
             </p>

@@ -1,16 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { use, useMemo, useState } from "react";
 import { linearSearchGenerator } from "../examples/linearSearch";
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input";
 
 
 export default function Home() {
-  const sampleArray = useMemo(() => [8, 3, 12, 7, 20, 5], []);
-  const target = 7;
-  const steps = useMemo(() => linearSearchGenerator(sampleArray, target), [sampleArray, target]);
+  const [draftArray, setDraftArray] = useState('8,4,2,1,7');
+  const [draftTarget, setDraftTarget] = useState('7');
+  const[FinalArray, setFinalArray] = useState<number[]>([8,4,2,1,7]);
+  const[finalTarget, setFinalTarget] = useState<number>(7);
   const [stepIndex, setStepIndex] = useState(0);
 
+  const steps = useMemo(() => linearSearchGenerator(FinalArray, finalTarget), [FinalArray, finalTarget]);
   const currentStep = steps[stepIndex];
 
   const handlePrev = () => {
@@ -21,15 +24,29 @@ export default function Home() {
     setStepIndex((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
+  function commitInputs() {
+  const parsed = draftArray
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0)
+    .map(Number);
+
+    const parsedTarget = Number(draftTarget.trim());
+    setFinalArray(parsed);
+    setFinalTarget(parsedTarget);
+    setStepIndex(0);
+
+  }
+
   return (
     <div className="min-h-screen w-full" style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}>
       <main className="flex flex-col items-center justify-center min-h-screen px-4">
         <div className="max-w-3xl w-full">
           <h1 className="text-4xl font-bold mb-4" style={{ color: "var(--primary)" }}>
-            DSA Visualizer
+            Linear Search Visualizer
           </h1>
           <p className="text-lg mb-8" style={{ color: "var(--muted-foreground)" }}>
-            Testing Arrays
+            Linear Search Based Algorithm
           </p>
 
           <div className="mb-6 flex flex-wrap items-center gap-3 cursor-pointer">
@@ -71,7 +88,7 @@ export default function Home() {
               borderColor: "var(--border)",
             }}
           >
-            <h2 className="text-xl font-semibold mb-6" style={{ color: "var(--primary)" }}>
+            <h2 className="text-xl font-semibold mb-6" style={{ color: "var(--primary)" }}> 
               Array Structure
             </h2>
             <div className="flex gap-2 flex-wrap">
@@ -110,6 +127,23 @@ export default function Home() {
             <p className="mt-6 text-base" style={{ color: "var(--muted-foreground)" }}>
               {currentStep.message || "Starting search"}
             </p>
+            <Input
+            type="text"
+            required
+            value={draftArray}
+            onChange={(e) => setDraftArray(e.target.value)}>
+            </Input>
+
+            <Input
+            type="text"
+            required
+            value={draftTarget}
+            onChange={(e) => setDraftTarget(e.target.value)}>
+            </Input>
+
+            <Button
+            onClick={commitInputs}>Done</Button>
+            
           </div>
         </div>
       </main>

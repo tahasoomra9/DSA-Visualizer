@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { linearSearchGenerator } from "../examples/linearSearch";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
@@ -13,8 +13,30 @@ export default function Home() {
   const[finalTarget, setFinalTarget] = useState<number>(7);
   const [stepIndex, setStepIndex] = useState(0);
 
+
   const steps = useMemo(() => linearSearchGenerator(FinalArray, finalTarget), [FinalArray, finalTarget]);
   const currentStep = steps[stepIndex];
+
+  const isArrayValid = useMemo(() => {
+    const raw = draftArray
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+
+    if (raw.length === 0) {
+      return false;
+    }
+
+    const parsed = raw.map(Number);
+    return !parsed.some((n) => Number.isNaN(n));
+  }, [draftArray]);
+
+  const isTargetValid = useMemo(() => {
+    const parsedTarget = Number(draftTarget.trim());
+    return !Number.isNaN(parsedTarget);
+  }, [draftTarget]);
+
+  const isInputValid = isArrayValid && isTargetValid;
 
   const handlePrev = () => {
     setStepIndex((prev) => Math.max(prev - 1, 0));
@@ -25,13 +47,25 @@ export default function Home() {
   };
 
   function commitInputs() {
-  const parsed = draftArray
+  const raw = draftArray
     .split(",")
     .map((s) => s.trim())
-    .filter((s) => s.length > 0)
-    .map(Number);
+    .filter((s) => s.length > 0);
 
+    if (raw.length === 0) {
+      return
+    }
+    const parsed = raw.map(Number)
+
+
+    if (parsed.some(n => Number.isNaN(n))) {
+      return;
+    }
+    
     const parsedTarget = Number(draftTarget.trim());
+    if (Number.isNaN(parsedTarget)) {
+      return;
+    }
     setFinalArray(parsed);
     setFinalTarget(parsedTarget);
     setStepIndex(0);
@@ -127,22 +161,59 @@ export default function Home() {
             <p className="mt-6 text-base" style={{ color: "var(--muted-foreground)" }}>
               {currentStep.message || "Starting search"}
             </p>
-            <Input
-            type="text"
-            required
-            value={draftArray}
-            onChange={(e) => setDraftArray(e.target.value)}>
-            </Input>
+            <div className="mt-8 space-y-4 rounded-lg border p-4" style={{ borderColor: "var(--border)" }}>
+              <h3 className="text-base font-semibold" style={{ color: "var(--primary)" }}>
+                Input Settings
+              </h3>
 
-            <Input
-            type="text"
-            required
-            value={draftTarget}
-            onChange={(e) => setDraftTarget(e.target.value)}>
-            </Input>
+              <div className="space-y-1.5">
+                <label htmlFor="example-array" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
+                  Example Array
+                </label>
+                <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+                  Enter numbers separated by commas, e.g. 8,4,2,1,7
+                </p>
+                <Input
+                  id="example-array"
+                  type="text"
+                  required
+                  value={draftArray}
+                  aria-invalid={!isArrayValid}
+                  placeholder="8,4,2,1,7"
+                  onChange={(e) => setDraftArray(e.target.value)}
+                />
+              </div>
 
-            <Button
-            onClick={commitInputs}>Done</Button>
+              <div className="space-y-1.5">
+                <label htmlFor="target-value" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
+                  Target Value
+                </label>
+                <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+                  Enter one number to search for, e.g. 7
+                </p>
+                <Input
+                  id="target-value"
+                  type="text"
+                  required
+                  value={draftTarget}
+                  aria-invalid={!isTargetValid}
+                  placeholder="7"
+                  onChange={(e) => setDraftTarget(e.target.value)}
+                />
+              </div>
+
+              <Button
+                disabled={!isInputValid}
+                className="mt-1 w-full sm:w-auto"
+                style={{
+                  backgroundColor: isInputValid ? "var(--primary)" : "var(--muted)",
+                  color: isInputValid ? "var(--primary-foreground)" : "var(--muted-foreground)",
+                }}
+                onClick={commitInputs}
+              >
+                Done
+              </Button>
+            </div>
             
           </div>
         </div>

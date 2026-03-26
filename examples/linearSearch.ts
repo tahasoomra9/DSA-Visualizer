@@ -22,26 +22,26 @@ function createStep(
 };
 
 export function linearSearchGenerator(arrayToSearch: number[], targetValue: number): Step[] {
-    const step :Step[] = [];
+    const steps :Step[] = [];
     
-    step.push(createStep(arrayToSearch, -1, targetValue, "", false));
+    steps.push(createStep(arrayToSearch, -1, targetValue, "", false));
 
     for (let i = 0; i < arrayToSearch.length; i += 1) {
         const currNum = arrayToSearch[i];
-        let ArrayMessage = `Checking element ${currNum} at index ${i}`;
+        let message = `Checking element ${currNum} at index ${i}`;
         let isMatched = false;
 
         if (currNum === targetValue) {
-            ArrayMessage = `Target found at index ${i}`;
+            message = `Target found at index ${i}`;
             isMatched = true;
-            step.push(createStep(arrayToSearch, i, targetValue, ArrayMessage, isMatched));
-            return step;
+            steps.push(createStep(arrayToSearch, i, targetValue, message, isMatched));
+            return steps;
         }
-        step.push(createStep(arrayToSearch, i, targetValue, ArrayMessage, isMatched));
+        steps.push(createStep(arrayToSearch, i, targetValue, message, isMatched));
 
     }
 
-    step.push(createStep(arrayToSearch, -1, targetValue, `Target Value ${targetValue} not found in array`, false));
-    return step;
+    steps.push(createStep(arrayToSearch, -1, targetValue, `Target Value ${targetValue} not found in array`, false));
+    return steps;
 
 }

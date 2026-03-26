@@ -4,7 +4,45 @@ import { useMemo, useState } from "react";
 import { linearSearchGenerator } from "../examples/linearSearch";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
+import type { Step } from "../types/algorithm"
 
+type AlgorithmGenerator = (array: number[], target: number) => Step[];
+
+//step control
+function StepControls({
+  stepIndex,
+  totalSteps,
+  onPrev,
+  onNext,
+}: {
+  stepIndex: number;
+  totalSteps: number;
+  onPrev: () => void;
+  onNext: () => void;
+}) {
+  return(
+    <div className="mb-6 flex flex-wrap items-center gap-3">
+      <Button
+      type="button"
+      onClick={onPrev}
+      disabled= {stepIndex === 0}
+      className="px-4 py-2 rounded-lg border disabled:opacity-50">
+        Previous
+      </Button>
+
+      <Button
+      type="button"
+      onClick={onNext}
+      disabled = {stepIndex === totalSteps}>
+        Next
+      </Button>
+
+      <p className="text-sm" style={{ color: "var(--muted-foreground)"}}>
+        Step {stepIndex + 1} of {totalSteps}
+      </p>
+    </div>
+  );
+}
 
 export default function Home() {
   const [draftArray, setDraftArray] = useState('8,4,2,1,7');

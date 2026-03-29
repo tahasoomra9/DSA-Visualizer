@@ -1,0 +1,48 @@
+import type { Step } from "@/types/algorithm";
+
+type ArrayVisualizerProps = {
+  step: Step;
+};
+
+export function ArrayVisualizer({ step }: ArrayVisualizerProps) {
+  return (
+    <>
+      <h2 className="text-xl font-semibold mb-6" style={{ color: "var(--primary)" }}>
+        Array Structure
+      </h2>
+      <div className="flex gap-2 flex-wrap">
+        {step.array.map((num, index) => {
+          const isActive = step.activeIndices.includes(index);
+          const isFoundAtIndex = isActive && step.isMatched && num === step.target;
+          let boxBorderColor = "var(--border)";
+
+          if (isActive) {
+            boxBorderColor = "var(--primary)";
+          }
+
+          if (isFoundAtIndex) {
+            boxBorderColor = "var(--approved)";
+          }
+
+          return (
+            <div
+              key={`${num}-${index}`}
+              className="w-12 h-12 flex items-center justify-center rounded-xl border-2 font-semibold transition-all hover:scale-110"
+              style={{
+                backgroundColor: "var(--background)",
+                borderColor: boxBorderColor,
+                color: "var(--primary)",
+              }}
+            >
+              {num}
+            </div>
+          );
+        })}
+      </div>
+
+      <p className="mt-6 text-base" style={{ color: "var(--muted-foreground)" }}>
+        {step.message || "Starting search"}
+      </p>
+    </>
+  );
+}

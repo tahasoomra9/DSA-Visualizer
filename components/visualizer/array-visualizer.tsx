@@ -13,7 +13,7 @@ export function ArrayVisualizer({ step }: ArrayVisualizerProps) {
       <div className="flex gap-2 flex-wrap">
         {step.array.map((num, index) => {
           const isActive = step.activeIndices.includes(index);
-          const isFoundAtIndex = isActive && step.isMatched && num === step.target;
+          const isFoundAtIndex = isActive && step.isMatched;
           let boxBorderColor = "var(--border)";
 
           if (isActive) {

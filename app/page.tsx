@@ -1,21 +1,32 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { linearSearchGenerator } from "../examples/linearSearch";
 import { StepControls } from "@/components/visualizer/step-controls";
 import { ArrayVisualizer } from "@/components/visualizer/array-visualizer";
 import { InputSettings } from "@/components/visualizer/input-settings";
+import { AlgorithmSidebar } from "@/components/visualizer/algorithm-sidebar";
+import { ALGORITHM_DEFINITIONS, type AlgorithmKey } from "@/lib/algorithms";
 
 export default function Home() {
-  const [draftArray, setDraftArray] = useState('8,4,2,1,7');
-  const [draftTarget, setDraftTarget] = useState('7');
-  const[FinalArray, setFinalArray] = useState<number[]>([8,4,2,1,7]);
-  const[finalTarget, setFinalTarget] = useState<number>(7);
+  const [draftArray, setDraftArray] = useState("8,4,2,1,7");
+  const [draftTarget, setDraftTarget] = useState("7");
+  const [finalArray, setFinalArray] = useState<number[]>([8, 4, 2, 1, 7]);
+  const [finalTarget, setFinalTarget] = useState<number>(7);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<AlgorithmKey>("linear-search");
   const [stepIndex, setStepIndex] = useState(0);
 
+  const activeAlgorithm = ALGORITHM_DEFINITIONS[selectedAlgorithm];
 
-  const steps = useMemo(() => linearSearchGenerator(FinalArray, finalTarget), [FinalArray, finalTarget]);
+  const steps = useMemo(
+    () => activeAlgorithm.generator(finalArray, finalTarget),
+    [activeAlgorithm, finalArray, finalTarget]
+  );
   const currentStep = steps[stepIndex];
+
+  const handleAlgorithmSelect = (algorithm: AlgorithmKey) => {
+    setSelectedAlgorithm(algorithm);
+    setStepIndex(0);
+  };
 
   const isArrayValid = useMemo(() => {
     const raw = draftArray
@@ -47,21 +58,20 @@ export default function Home() {
   };
 
   function commitInputs() {
-  const raw = draftArray
-    .split(",")
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0);
+    const raw = draftArray
+      .split(",")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
 
     if (raw.length === 0) {
-      return
-    }
-    const parsed = raw.map(Number)
-
-
-    if (parsed.some(n => Number.isNaN(n))) {
       return;
     }
-    
+    const parsed = raw.map(Number);
+
+    if (parsed.some((n) => Number.isNaN(n))) {
+      return;
+    }
+
     const parsedTarget = Number(draftTarget.trim());
     if (Number.isNaN(parsedTarget)) {
       return;
@@ -69,18 +79,21 @@ export default function Home() {
     setFinalArray(parsed);
     setFinalTarget(parsedTarget);
     setStepIndex(0);
-
   }
 
   return (
-    <div className="min-h-screen w-full" style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}>
-      <main className="flex flex-col items-center justify-center min-h-screen px-4">
+    <div className="min-h-screen w-full flex" style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}>
+      <AlgorithmSidebar
+        selectedAlgorithm={selectedAlgorithm}
+        onSelect={handleAlgorithmSelect}
+      />
+      <main className="flex-1 flex flex-col items-center justify-center min-h-screen px-4">
         <div className="max-w-3xl w-full">
           <h1 className="text-4xl font-bold mb-4" style={{ color: "var(--primary)" }}>
-            Linear Search Visualizer
+            {activeAlgorithm.label} Visualizer
           </h1>
           <p className="text-lg mb-8" style={{ color: "var(--muted-foreground)" }}>
-            Linear Search Based Algorithm
+            {activeAlgorithm.description}
           </p>
 
           <StepControls

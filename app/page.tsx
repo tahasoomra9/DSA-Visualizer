@@ -1,11 +1,33 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
+import { AppSidebar } from "@/components/app-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
 import { StepControls } from "@/components/visualizer/step-controls";
 import { ArrayVisualizer } from "@/components/visualizer/array-visualizer";
 import { InputSettings } from "@/components/visualizer/input-settings";
-import { AlgorithmSidebar } from "@/components/visualizer/algorithm-sidebar";
+import { ProblemLinksSection } from "@/components/visualizer/problem-links-section";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { ALGORITHM_DEFINITIONS, type AlgorithmKey } from "@/lib/algorithms";
+import {
+  TWO_POINTERS_DIFFICULTY_COLORS,
+  TWO_POINTERS_PROBLEMS,
+} from "@/examples/twoPointers";
+import { 
+  SLIDING_WINDOW_DIFFICULTY_COLORS, 
+  SLIDING_WINDOW_PROBLEMS } from "@/examples/slidingWindow";
 
 export default function Home() {
   const [draftArray, setDraftArray] = useState("8,4,2,1,7");
@@ -81,20 +103,85 @@ export default function Home() {
     setStepIndex(0);
   }
 
+  const problemConfigByConfig = {
+    "two-pointers": {
+      title: "Two Pointers Problems",
+      subtitle: "Practice on LeetCode",
+      badgeLabel: "Practice on LeetCode",
+      problems: TWO_POINTERS_PROBLEMS,
+      difficultyColors: TWO_POINTERS_DIFFICULTY_COLORS,
+    },
+    "sliding-window": {
+      title: "Sliding Window Problems",
+      subtitle: "Practice on LeetCode",
+      badgeLabel: "Practice on LeetCode",
+      problems: SLIDING_WINDOW_PROBLEMS,
+      difficultyColors: SLIDING_WINDOW_DIFFICULTY_COLORS,
+    },
+  };
+
+  const selectedProblemConfig =
+    selectedAlgorithm in problemConfigByConfig
+      ? problemConfigByConfig[
+          selectedAlgorithm as keyof typeof problemConfigByConfig
+        ]
+      : undefined;
+
   return (
-    <div className="min-h-screen w-full flex" style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}>
-      <AlgorithmSidebar
-        selectedAlgorithm={selectedAlgorithm}
-        onSelect={handleAlgorithmSelect}
-      />
-      <main className="flex-1 flex flex-col items-center justify-center min-h-screen px-4">
-        <div className="max-w-3xl w-full">
-          <h1 className="text-4xl font-bold mb-4" style={{ color: "var(--primary)" }}>
+    <TooltipProvider>
+      <SidebarProvider
+        style={
+          {
+            "--sidebar": "var(--background)",
+            "--sidebar-foreground": "var(--foreground)",
+            "--sidebar-border": "var(--border)",
+            "--sidebar-accent": "var(--background)",
+            "--sidebar-accent-foreground": "var(--foreground)",
+            "--sidebar-primary": "var(--foreground)",
+            "--sidebar-primary-foreground": "var(--background)",
+          } as CSSProperties
+        }
+      >
+        <AppSidebar
+          selectedAlgorithm={selectedAlgorithm}
+          onAlgorithmSelect={handleAlgorithmSelect}
+        />
+
+        <SidebarInset>
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator
+              orientation="vertical"
+              className="mr-2 data-[orientation=vertical]:h-4"
+            />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbPage>DSA Wizard</BreadcrumbPage>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{activeAlgorithm.label}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </header>
+          <main className="flex-1 min-w-0 flex items-start justify-center px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+            <div className="w-full max-w-4xl space-y-6 sm:space-y-8">
+          <div className="space-y-3 sm:space-y-4">
+            <h1
+              className="text-3xl font-bold leading-tight sm:text-4xl wrap-break-word"
+              style={{ color: "var(--primary)" }}
+            >
             {activeAlgorithm.label} Visualizer
-          </h1>
-          <p className="text-lg mb-8" style={{ color: "var(--muted-foreground)" }}>
+            </h1>
+            <p
+              className="max-w-prose text-base leading-relaxed sm:text-lg"
+              style={{ color: "var(--muted-foreground)" }}
+            >
             {activeAlgorithm.description}
-          </p>
+            </p>
+          </div>
 
           <StepControls
             stepIndex={stepIndex}
@@ -102,9 +189,9 @@ export default function Home() {
             onPrev={handlePrev}
             onNext={handleNext}
           />
-          
-          <div 
-            className="p-8 rounded-xl border-2"
+
+          <div
+            className="rounded-xl border-2 p-4 sm:p-6 lg:p-8"
             style={{
               backgroundColor: "var(--background)",
               borderColor: "var(--border)",
@@ -121,10 +208,21 @@ export default function Home() {
               onTargetChange={setDraftTarget}
               onSubmit={commitInputs}
             />
-            
           </div>
-        </div>
-      </main>
-    </div>
+
+          {selectedProblemConfig && (
+            <ProblemLinksSection
+              title={selectedProblemConfig.title}
+              subtitle={selectedProblemConfig.subtitle}
+              badgeLabel={selectedProblemConfig.badgeLabel}
+              problems={selectedProblemConfig.problems}
+              difficultyColors={selectedProblemConfig.difficultyColors}
+            />
+          )}
+            </div>
+          </main>
+        </SidebarInset>
+      </SidebarProvider>
+    </TooltipProvider>
   );
 }

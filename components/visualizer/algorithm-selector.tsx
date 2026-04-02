@@ -13,7 +13,7 @@ type AlgorithmSelectorProps = {
 export function AlgorithmSelector({
   selectedAlgorithm,
   onSelect,
-}: AlgorithmSelectorProps) {
+}: Readonly<AlgorithmSelectorProps>) {
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2">
       {ALGORITHM_ORDER.map((key) => {
@@ -27,9 +27,9 @@ export function AlgorithmSelector({
             onClick={() => onSelect(key)}
             className="px-4 py-2 rounded-lg border"
             style={{
-              borderColor: isSelected ? "var(--primary)" : "var(--border)",
-              backgroundColor: isSelected ? "var(--primary)" : "var(--secondary)",
-              color: isSelected ? "var(--primary-foreground)" : "var(--secondary-foreground)",
+              borderColor: isSelected ? "#2a2a2a" : "#111111",
+              backgroundColor: isSelected ? "#050505" : "#000000",
+              color: "var(--foreground)",
             }}
           >
             {algorithm.label}

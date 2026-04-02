@@ -4,13 +4,13 @@ type ArrayVisualizerProps = {
   step: Step;
 };
 
-export function ArrayVisualizer({ step }: ArrayVisualizerProps) {
+export function ArrayVisualizer({ step }: Readonly<ArrayVisualizerProps>) {
   return (
     <>
       <h2 className="text-xl font-semibold mb-6" style={{ color: "var(--primary)" }}>
         Array Structure
       </h2>
-      <div className="flex gap-2 flex-wrap">
+      <div className="flex flex-wrap gap-2 sm:gap-3">
         {step.array.map((num, index) => {
           const isActive = step.activeIndices.includes(index);
           const isFoundAtIndex = isActive && step.isMatched;
@@ -40,7 +40,10 @@ export function ArrayVisualizer({ step }: ArrayVisualizerProps) {
         })}
       </div>
 
-      <p className="mt-6 text-base" style={{ color: "var(--muted-foreground)" }}>
+      <p
+        className="mt-6 max-w-prose text-base leading-relaxed wrap-break-word"
+        style={{ color: "var(--muted-foreground)" }}
+      >
         {step.message || "Starting search"}
       </p>
     </>

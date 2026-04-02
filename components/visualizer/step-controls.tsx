@@ -12,9 +12,9 @@ export function StepControls({
   totalSteps,
   onPrev,
   onNext,
-}: StepControlsProps) {
+}: Readonly<StepControlsProps>) {
   return (
-    <div className="mb-6 flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-3">
       <Button
         type="button"
         onClick={onPrev}
@@ -43,7 +43,7 @@ export function StepControls({
         Next
       </Button>
 
-      <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
+      <p className="w-full text-sm leading-relaxed sm:w-auto" style={{ color: "var(--muted-foreground)" }}>
         Step {stepIndex + 1} of {totalSteps}
       </p>
     </div>

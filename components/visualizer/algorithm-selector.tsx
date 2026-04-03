@@ -25,12 +25,9 @@ export function AlgorithmSelector({
             key={key}
             type="button"
             onClick={() => onSelect(key)}
-            className="px-4 py-2 rounded-lg border"
-            style={{
-              borderColor: isSelected ? "#2a2a2a" : "#111111",
-              backgroundColor: isSelected ? "#050505" : "#000000",
-              color: "var(--foreground)",
-            }}
+            variant={isSelected ? "secondary" : "outline"}
+            size="lg"
+            className="rounded-lg"
           >
             {algorithm.label}
           </Button>

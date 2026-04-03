@@ -14,17 +14,14 @@ export function StepControls({
   onNext,
 }: Readonly<StepControlsProps>) {
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center gap-4">
       <Button
         type="button"
         onClick={onPrev}
         disabled={stepIndex === 0}
-        className="px-4 py-2 rounded-lg border disabled:opacity-50 cursor-pointer"
-        style={{
-          borderColor: "var(--border)",
-          backgroundColor: "var(--secondary)",
-          color: "var(--secondary-foreground)",
-        }}
+        variant="outline"
+        size="lg"
+        className="min-w-24"
       >
         Previous
       </Button>
@@ -33,17 +30,14 @@ export function StepControls({
         type="button"
         onClick={onNext}
         disabled={stepIndex === totalSteps - 1}
-        className="px-4 py-2 rounded-lg border disabled:opacity-50 cursor-pointer"
-        style={{
-          borderColor: "var(--border)",
-          backgroundColor: "var(--secondary)",
-          color: "var(--secondary-foreground)",
-        }}
+        variant="secondary"
+        size="lg"
+        className="min-w-24"
       >
         Next
       </Button>
 
-      <p className="w-full text-sm leading-relaxed sm:w-auto" style={{ color: "var(--muted-foreground)" }}>
+      <p className="w-full text-sm leading-6 text-muted-foreground sm:w-auto">
         Step {stepIndex + 1} of {totalSteps}
       </p>
     </div>

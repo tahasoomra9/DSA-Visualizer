@@ -58,7 +58,7 @@ export function AlgorithmSidebar({
           {!collapsed && (
             <div className="flex min-w-0 items-center gap-2.5">
               <span
-                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border text-[11px] font-bold tracking-wide"
+                className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border text-xs font-bold tracking-wide"
                 style={{ borderColor: "var(--border)", color: "var(--primary)" }}
               >
                 DS
@@ -71,7 +71,7 @@ export function AlgorithmSidebar({
                   DSA Wizard
                 </h2>
                 <p
-                  className="mt-1 max-w-full text-[11px] leading-tight wrap-break-word"
+                  className="mt-1 max-w-full text-xs leading-4 wrap-break-word"
                   style={{ color: "var(--muted-foreground)" }}
                 >
                   Algorithm Visualizer
@@ -82,7 +82,7 @@ export function AlgorithmSidebar({
 
           {collapsed && (
             <span
-              className="mx-auto inline-flex h-7 w-7 items-center justify-center rounded-lg border text-[11px] font-bold tracking-wide"
+              className="mx-auto inline-flex h-7 w-7 items-center justify-center rounded-lg border text-xs font-bold tracking-wide"
               style={{ borderColor: "var(--border)", color: "var(--primary)" }}
               aria-hidden="true"
             >
@@ -109,17 +109,17 @@ export function AlgorithmSidebar({
         </div>
       </div>
 
-      <nav className="flex flex-col px-2.5 py-3">
+      <nav className="flex flex-col px-3 py-3">
         {!collapsed && (
           <p
-            className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-[0.08em]"
+            className="px-2 pb-2 text-xs font-semibold uppercase tracking-[0.08em]"
             style={{ color: "var(--muted-foreground)" }}
           >
             Algorithms
           </p>
         )}
 
-        <div className="flex flex-col gap-1.5 pb-1">
+        <div className="flex flex-col gap-2 pb-1">
         {ALGORITHM_ORDER.map((key) => {
           const algorithm = ALGORITHM_DEFINITIONS[key];
           const isSelected = key === selectedAlgorithm;
@@ -128,7 +128,7 @@ export function AlgorithmSidebar({
             <button
               key={key}
               onClick={() => onSelect(key)}
-              className={`group relative w-full rounded-lg border px-3 py-2.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 ${
+              className={`group relative w-full rounded-lg border px-3 py-3 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:border-ring ${
                 isSelected ? "hover:opacity-95" : "hover:bg-muted/40"
               } ${
                 collapsed ? "flex items-center justify-center" : "flex flex-col items-start gap-1"

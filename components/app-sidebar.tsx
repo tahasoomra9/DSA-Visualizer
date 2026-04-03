@@ -42,7 +42,7 @@ export function AppSidebar({ selectedAlgorithm, onAlgorithmSelect, ...props }: A
             <span className="truncate text-sm font-semibold text-sidebar-foreground">DSA Wizard</span>
             <span className="truncate text-xs text-sidebar-foreground/70">Algorithm Visualizer</span>
           </div>
-          <div className="max-w-24 overflow-hidden whitespace-nowrap rounded-md border border-sidebar-border px-2 py-1 text-[10px] font-medium text-sidebar-foreground/70 transition-[max-width,opacity,padding,margin] duration-300 ease-out motion-reduce:transition-none group-data-[collapsible=icon]:max-w-0 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:py-0 group-data-[collapsible=icon]:opacity-0">
+          <div className="max-w-24 overflow-hidden whitespace-nowrap rounded-md border border-sidebar-border px-2 py-1 text-xs font-medium text-sidebar-foreground/70 transition-[max-width,opacity,padding,margin] duration-300 ease-out motion-reduce:transition-none group-data-[collapsible=icon]:max-w-0 group-data-[collapsible=icon]:px-0 group-data-[collapsible=icon]:py-0 group-data-[collapsible=icon]:opacity-0">
             {ALGORITHM_ORDER.length} algorithms
           </div>
         </div>
@@ -50,7 +50,7 @@ export function AppSidebar({ selectedAlgorithm, onAlgorithmSelect, ...props }: A
 
       <SidebarContent className="px-2 py-3 transition-[padding] duration-300 ease-out motion-reduce:transition-none group-data-[collapsible=icon]:py-2">
         <SidebarGroup className="p-0">
-          <SidebarGroupLabel className="px-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-sidebar-foreground/70">
+          <SidebarGroupLabel className="px-2 text-xs font-semibold uppercase tracking-[0.08em] text-sidebar-foreground/70">
             Choose Algorithm
           </SidebarGroupLabel>
           <SidebarGroupContent className="pt-1">
@@ -66,7 +66,7 @@ export function AppSidebar({ selectedAlgorithm, onAlgorithmSelect, ...props }: A
                       tooltip={algorithm.label + " - " + algorithm.description}
                       isActive={isSelected}
                       onClick={() => onAlgorithmSelect(key)}
-                      className="h-auto items-start gap-3 rounded-lg px-2.5 py-2.5 text-sidebar-foreground hover:translate-x-0.5 group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:gap-0 group-data-[collapsible=icon]:hover:translate-x-0 data-[active=true]:bg-sidebar-primary data-[active=true]:text-sidebar-primary-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2!"
+                      className="h-auto items-start gap-3 rounded-lg px-3 py-3 text-sidebar-foreground hover:translate-x-0.5 group-data-[collapsible=icon]:mx-auto group-data-[collapsible=icon]:gap-0 group-data-[collapsible=icon]:hover:translate-x-0 data-[active=true]:bg-sidebar-primary data-[active=true]:text-sidebar-primary-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2!"
                     >
                       <Icon className="mt-0.5 h-4 w-4 shrink-0 transition-transform duration-300 ease-out group-hover/menu-button:translate-x-0.5 group-data-[collapsible=icon]:mt-0 group-data-[collapsible=icon]:group-hover/menu-button:translate-x-0" />
                       <div className="min-w-0 max-w-48 max-h-20 space-y-1 overflow-hidden text-left transition-[max-width,max-height,opacity,transform] duration-300 ease-out motion-reduce:transition-none group-data-[collapsible=icon]:max-w-0 group-data-[collapsible=icon]:max-h-0 group-data-[collapsible=icon]:translate-x-1 group-data-[collapsible=icon]:opacity-0">
@@ -91,7 +91,7 @@ export function AppSidebar({ selectedAlgorithm, onAlgorithmSelect, ...props }: A
       </SidebarContent>
 
       <SidebarFooter className="max-h-28 overflow-hidden border-t border-sidebar-border p-3 transition-[max-height,opacity,padding,border-color] duration-300 ease-out motion-reduce:transition-none group-data-[collapsible=icon]:max-h-0 group-data-[collapsible=icon]:border-transparent group-data-[collapsible=icon]:py-0 group-data-[collapsible=icon]:opacity-0">
-        <div className="rounded-lg border border-sidebar-border px-3 py-2.5">
+        <div className="rounded-lg border border-sidebar-border px-3 py-3">
           <p className="truncate text-xs font-semibold text-sidebar-foreground">
             Now viewing: {selectedDefinition.label}
           </p>

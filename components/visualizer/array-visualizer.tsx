@@ -7,7 +7,7 @@ type ArrayVisualizerProps = {
 export function ArrayVisualizer({ step }: Readonly<ArrayVisualizerProps>) {
   return (
     <>
-      <h2 className="text-xl font-semibold mb-6" style={{ color: "var(--primary)" }}>
+      <h2 className="mb-6 text-2xl font-semibold leading-tight tracking-tight" style={{ color: "var(--primary)" }}>
         Array Structure
       </h2>
       <div className="flex flex-wrap gap-2 sm:gap-3">
@@ -27,7 +27,7 @@ export function ArrayVisualizer({ step }: Readonly<ArrayVisualizerProps>) {
           return (
             <div
               key={`${num}-${index}`}
-              className="w-12 h-12 flex items-center justify-center rounded-xl border-2 font-semibold transition-all hover:scale-110"
+              className="flex h-12 w-12 items-center justify-center rounded-lg border text-base font-semibold transition-transform duration-200 hover:scale-105"
               style={{
                 backgroundColor: "var(--background)",
                 borderColor: boxBorderColor,
@@ -41,7 +41,7 @@ export function ArrayVisualizer({ step }: Readonly<ArrayVisualizerProps>) {
       </div>
 
       <p
-        className="mt-6 max-w-prose text-base leading-relaxed wrap-break-word"
+        className="mt-6 max-w-prose text-base leading-7 wrap-break-word"
         style={{ color: "var(--muted-foreground)" }}
       >
         {step.message || "Starting search"}

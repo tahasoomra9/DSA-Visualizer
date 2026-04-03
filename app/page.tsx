@@ -175,17 +175,17 @@ export default function Home() {
               </BreadcrumbList>
             </Breadcrumb>
           </header>
-          <main className="flex-1 min-w-0 flex items-start justify-center px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
-            <div className="w-full max-w-4xl space-y-6 sm:space-y-8">
-          <div className="space-y-3 sm:space-y-4">
+          <main className="flex-1 min-w-0 flex items-start justify-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+            <div className="w-full max-w-4xl space-y-8 sm:space-y-10">
+          <div className="space-y-4">
             <h1
-              className="text-3xl font-bold leading-tight sm:text-4xl wrap-break-word"
+              className="text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl wrap-break-word"
               style={{ color: "var(--primary)" }}
             >
             {activeAlgorithm.label} Visualizer
             </h1>
             <p
-              className="max-w-prose text-base leading-relaxed sm:text-lg"
+              className="max-w-prose text-base leading-7 sm:text-lg sm:leading-8"
               style={{ color: "var(--muted-foreground)" }}
             >
             {activeAlgorithm.description}
@@ -200,7 +200,7 @@ export default function Home() {
           />
 
           <div
-            className="rounded-xl border-2 p-4 sm:p-6 lg:p-8"
+            className="rounded-xl border p-6 sm:p-8"
             style={{
               backgroundColor: "var(--background)",
               borderColor: "var(--border)",

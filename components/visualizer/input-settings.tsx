@@ -21,18 +21,18 @@ export function InputSettings({
   onArrayChange,
   onTargetChange,
   onSubmit,
-}: InputSettingsProps) {
+}: Readonly<InputSettingsProps>) {
   return (
-    <div className="mt-8 space-y-4 rounded-lg border p-4" style={{ borderColor: "var(--border)" }}>
-      <h3 className="text-base font-semibold" style={{ color: "var(--primary)" }}>
+    <div className="mt-10 space-y-6 rounded-xl border p-6" style={{ borderColor: "var(--border)" }}>
+      <h3 className="text-lg font-semibold leading-6 tracking-tight" style={{ color: "var(--primary)" }}>
         Input Settings
       </h3>
 
-      <div className="space-y-1.5">
-        <label htmlFor="example-array" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
+      <div className="space-y-2">
+        <label htmlFor="example-array" className="text-sm font-medium leading-5" style={{ color: "var(--foreground)" }}>
           Example Array
         </label>
-        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-xs leading-5" style={{ color: "var(--muted-foreground)" }}>
           Enter numbers separated by commas, e.g. 8,4,2,1,7
         </p>
         <Input
@@ -46,11 +46,11 @@ export function InputSettings({
         />
       </div>
 
-      <div className="space-y-1.5">
-        <label htmlFor="target-value" className="text-sm font-medium" style={{ color: "var(--foreground)" }}>
+      <div className="space-y-2">
+        <label htmlFor="target-value" className="text-sm font-medium leading-5" style={{ color: "var(--foreground)" }}>
           Target Value
         </label>
-        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
+        <p className="text-xs leading-5" style={{ color: "var(--muted-foreground)" }}>
           Enter one number to search for, e.g. 7
         </p>
         <Input
@@ -66,11 +66,8 @@ export function InputSettings({
 
       <Button
         disabled={!isInputValid}
-        className="mt-1 w-full sm:w-auto"
-        style={{
-          backgroundColor: isInputValid ? "var(--primary)" : "var(--muted)",
-          color: isInputValid ? "var(--primary-foreground)" : "var(--muted-foreground)",
-        }}
+        size="lg"
+        className="w-full sm:w-auto"
         onClick={onSubmit}
       >
         Done

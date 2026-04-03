@@ -21,16 +21,16 @@ export function ProblemLinksSection({
 }: Readonly<ProblemLinksSectionProps>) {
   return (
     <section
-      className="mt-8 overflow-hidden rounded-2xl border p-4 sm:p-6"
+      className="mt-10 overflow-hidden rounded-xl border p-6 sm:p-8"
       style={{
         backgroundColor: "var(--background)",
         borderColor: "var(--border)",
       }}
     >
-      <div className="mb-5 flex flex-col gap-3 border-b pb-4 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-        <div className="min-w-0 space-y-1">
+      <div className="mb-6 flex flex-col gap-4 border-b pb-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+        <div className="min-w-0 space-y-1.5">
           <h2
-            className="text-lg font-semibold tracking-tight sm:text-xl"
+            className="text-xl font-semibold tracking-tight sm:text-2xl"
             style={{ color: "var(--primary)" }}
           >
             {title}
@@ -58,7 +58,7 @@ export function ProblemLinksSection({
             href={problem.link}
             target="_blank"
             rel="noreferrer"
-            className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2 rounded-xl border px-4 py-4 transition-colors hover:bg-white/5"
+            className="grid h-full grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-2 rounded-lg border px-4 py-4 transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:border-ring"
             style={{ borderColor: "var(--border)" }}
           >
             <div className="min-w-0 space-y-1">

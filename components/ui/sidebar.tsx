@@ -190,6 +190,14 @@ function Sidebar({
           style={
             {
               "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+              "--sidebar": "var(--background)",
+              "--sidebar-foreground": "var(--foreground)",
+              "--sidebar-border": "var(--border)",
+              "--sidebar-accent": "var(--background)",
+              "--sidebar-accent-foreground": "var(--foreground)",
+              "--sidebar-primary": "var(--foreground)",
+              "--sidebar-primary-foreground": "var(--background)",
+              "--sidebar-ring": "var(--ring)",
             } as React.CSSProperties
           }
           side={side}

@@ -17,7 +17,7 @@ import { MoreHorizontalIcon } from "lucide-react"
 
 export function NavMain({
   items,
-}: {
+}: Readonly<{
   items: {
     title: string
     url: string
@@ -28,7 +28,7 @@ export function NavMain({
       url: string
     }[]
   }[]
-}) {
+}>) {
   const { isMobile } = useSidebar()
 
   return (
@@ -51,7 +51,12 @@ export function NavMain({
                 >
                   {item.items.map((item) => (
                     <DropdownMenuItem asChild key={item.title}>
-                      <a href={item.url}>{item.title}</a>
+                      <a
+                        href={item.url}
+                        className="block w-full rounded-sm px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                      >
+                        {item.title}
+                      </a>
                     </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>

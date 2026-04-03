@@ -40,7 +40,7 @@ export function AlgorithmSidebar({
 
   return (
     <aside
-      className="relative h-screen shrink-0 overflow-y-auto border-r transition-all duration-300 ease-out"
+      className="relative h-dvh max-h-dvh shrink-0 overflow-y-auto overflow-x-hidden border-r transition-all duration-300 ease-out"
       style={{
         width: collapsed ? "3.5rem" : "min(18rem, 82vw)",
         backgroundColor: "var(--background)",
@@ -65,13 +65,13 @@ export function AlgorithmSidebar({
               </span>
               <div className="min-w-0">
                 <h2
-                  className="truncate text-sm font-semibold leading-none"
+                  className="text-sm font-semibold leading-tight wrap-break-word"
                   style={{ color: "var(--foreground)" }}
                 >
                   DSA Wizard
                 </h2>
                 <p
-                  className="mt-1 text-[11px] leading-none"
+                  className="mt-1 max-w-full text-[11px] leading-tight wrap-break-word"
                   style={{ color: "var(--muted-foreground)" }}
                 >
                   Algorithm Visualizer
@@ -119,7 +119,7 @@ export function AlgorithmSidebar({
           </p>
         )}
 
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1.5 pb-1">
         {ALGORITHM_ORDER.map((key) => {
           const algorithm = ALGORITHM_DEFINITIONS[key];
           const isSelected = key === selectedAlgorithm;
@@ -131,7 +131,7 @@ export function AlgorithmSidebar({
               className={`group relative w-full rounded-lg border px-3 py-2.5 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 ${
                 isSelected ? "hover:opacity-95" : "hover:bg-muted/40"
               } ${
-                collapsed ? "flex justify-center" : "flex flex-col items-start gap-1"
+                collapsed ? "flex items-center justify-center" : "flex flex-col items-start gap-1"
               }`}
               style={{
                 backgroundColor: isSelected
@@ -154,11 +154,11 @@ export function AlgorithmSidebar({
                 </span>
               ) : (
                 <>
-                  <span className="text-sm font-semibold leading-snug wrap-break-word">
+                  <span className="block w-full min-w-0 text-sm font-semibold leading-snug wrap-break-word">
                     {algorithm.label}
                   </span>
                   <span
-                    className="text-xs leading-snug whitespace-normal wrap-break-word"
+                    className="block w-full min-w-0 text-xs leading-snug whitespace-normal wrap-break-word"
                     style={{
                       color: isSelected
                         ? "var(--primary-foreground)"

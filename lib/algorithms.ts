@@ -1,9 +1,10 @@
 import { linearSearchGenerator } from "@/examples/linearSearch";
 import { slidingWindowGenerator } from "@/examples/slidingWindow";
 import { twoPointerGenerator } from "@/examples/twoPointers";
+import { binarySearchGenerator } from "@/examples/binarySearchGenerator"
 import type { Step } from "@/types/algorithm";
 
-export type AlgorithmKey = "linear-search" | "two-pointers" | "sliding-window";
+export type AlgorithmKey = "linear-search" | "two-pointers" | "sliding-window" | "binary-search";
 
 type AlgorithmGenerator = (array: number[], target: number) => Step[];
 
@@ -33,10 +34,17 @@ export const ALGORITHM_DEFINITIONS: Record<AlgorithmKey, AlgorithmDefinition> = 
     description: "Finds a contiguous subarray whose sum equals the target using a dynamic window.",
     generator: slidingWindowGenerator,
   },
+  "binary-search": {
+    key: "binary-search",
+    label: "Binary Search",
+    description: "Finds a target value in a sorted array by repeatedly dividing the search range in half.",
+    generator: binarySearchGenerator,
+  }
 };
 
 export const ALGORITHM_ORDER: AlgorithmKey[] = [
   "linear-search",
   "two-pointers",
   "sliding-window",
+  "binary-search"
 ];

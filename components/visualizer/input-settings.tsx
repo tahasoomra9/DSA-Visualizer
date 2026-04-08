@@ -64,7 +64,7 @@ export function InputSettings({
         />
       </div>
 
-      <Button
+      <Button  
         disabled={!isInputValid}
         size="lg"
         className="w-full sm:w-auto"

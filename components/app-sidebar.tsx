@@ -26,6 +26,7 @@ const iconByAlgorithm: Record<AlgorithmKey, React.ComponentType<{ className?: st
   "linear-search": SearchCode,
   "two-pointers": MoveHorizontal,
   "sliding-window": SquareStack,
+  "binary-search": SearchCode,
 }
 
 export function AppSidebar({ selectedAlgorithm, onAlgorithmSelect, ...props }: AppSidebarProps) {

@@ -81,6 +81,12 @@ export default function Home() {
     setStepIndex((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
+  const handleArrayValueSelect = (value: number) => {
+    setDraftTarget(String(value));
+    setFinalTarget(value);
+    setStepIndex(0);
+  };
+
   function commitInputs() {
     const raw = draftArray
       .split(",")
@@ -206,7 +212,14 @@ export default function Home() {
               borderColor: "var(--border)",
             }}
           >
-            <ArrayVisualizer step={currentStep} />
+            <ArrayVisualizer
+              step={currentStep}
+              onCellSelect={
+                selectedAlgorithm === "binary-search"
+                  ? handleArrayValueSelect
+                  : undefined
+              }
+            />
             <InputSettings
               draftArray={draftArray}
               draftTarget={draftTarget}

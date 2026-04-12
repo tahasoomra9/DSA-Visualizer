@@ -30,6 +30,7 @@ import {
   SLIDING_WINDOW_DIFFICULTY_COLORS, 
   SLIDING_WINDOW_PROBLEMS } from "@/examples/slidingWindow";
 import { LINEAR_SEARCH_DIFFICULTY_COLORS, LINEAR_SEARCH_PROBLEMS } from "@/examples/linearSearch";
+import { BINARY_SEARCH_DIFFICULTY_COLORS, BINARY_SEARCH_PROBLEMS } from "@/examples/binarySearchGenerator";
 
 export default function Home() {
   const [draftArray, setDraftArray] = useState("8,4,2,1,7");
@@ -133,6 +134,14 @@ export default function Home() {
       problems: LINEAR_SEARCH_PROBLEMS,
       difficultyColors: LINEAR_SEARCH_DIFFICULTY_COLORS,
     },
+    "binary-search": {
+      title: "Binary Search Problems",
+      subtitle: "Practice on LeetCode",
+      badgeLabel: "Practice on LeetCode",
+      problems: BINARY_SEARCH_PROBLEMS,
+      difficultyColors: BINARY_SEARCH_DIFFICULTY_COLORS
+
+    }
   };
 
   const selectedProblemConfig =

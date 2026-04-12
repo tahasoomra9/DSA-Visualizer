@@ -1,4 +1,134 @@
 import type { Step } from "@/types/algorithm";
+export type BinarySearchProblem = {
+    name: string,
+    difficulty: "Easy" | "Medium" | "Hard";
+    link: string;
+}
+
+export const BINARY_SEARCH_DIFFICULTY_COLORS: Record<BinarySearchProblem["difficulty"], string> ={
+    Easy: "text-green-500",
+    Medium: "text-yellow-500",
+    Hard: "text-red-500",
+}
+
+export const BINARY_SEARCH_PROBLEMS = [
+  // Easy
+  {
+    name: "Binary Search",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/binary-search/"
+  },
+  {
+    name: "Search Insert Position",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/search-insert-position/"
+  },
+  {
+    name: "First Bad Version",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/first-bad-version/"
+  },
+  {
+    name: "Sqrt(x)",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/sqrtx/"
+  },
+  {
+    name: "Valid Perfect Square",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/valid-perfect-square/"
+  },
+  {
+    name: "Arranging Coins",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/arranging-coins/"
+  },
+  {
+    name: "Guess Number Higher or Lower",
+    difficulty: "Easy",
+    link: "https://leetcode.com/problems/guess-number-higher-or-lower/"
+  },
+
+  // Medium
+  {
+    name: "Find First and Last Position of Element in Sorted Array",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+  },
+  {
+    name: "Search in Rotated Sorted Array",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/search-in-rotated-sorted-array/"
+  },
+  {
+    name: "Find Minimum in Rotated Sorted Array",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+  },
+  {
+    name: "Peak Index in a Mountain Array",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/peak-index-in-a-mountain-array/"
+  },
+  {
+    name: "Find Peak Element",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/find-peak-element/"
+  },
+  {
+    name: "Search a 2D Matrix",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/search-a-2d-matrix/"
+  },
+  {
+    name: "Search a 2D Matrix II",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/search-a-2d-matrix-ii/"
+  },
+  {
+    name: "Koko Eating Bananas",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/koko-eating-bananas/"
+  },
+  {
+    name: "Capacity To Ship Packages Within D Days",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/"
+  },
+  {
+    name: "Find the Smallest Divisor Given a Threshold",
+    difficulty: "Medium",
+    link: "https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/"
+  },
+
+  // Hard
+  {
+    name: "Median of Two Sorted Arrays",
+    difficulty: "Hard",
+    link: "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+  },
+  {
+    name: "Search in Rotated Sorted Array II",
+    difficulty: "Hard",
+    link: "https://leetcode.com/problems/search-in-rotated-sorted-array-ii/"
+  },
+  {
+    name: "Split Array Largest Sum",
+    difficulty: "Hard",
+    link: "https://leetcode.com/problems/split-array-largest-sum/"
+  },
+  {
+    name: "Find in Mountain Array",
+    difficulty: "Hard",
+    link: "https://leetcode.com/problems/find-in-mountain-array/"
+  },
+  {
+    name: "Kth Smallest Element in a Sorted Matrix",
+    difficulty: "Hard",
+    link: "https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/"
+  }
+];
+
 
 type BinaryComparison = NonNullable<Step["comparison"]>;
 

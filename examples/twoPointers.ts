@@ -115,20 +115,22 @@ export const TWO_POINTERS_PROBLEMS: TwoPointersProblem[] = [
  */
 
 function createStep(
-    array: number[],
-    activeIndex: number[],
-    target: number,
-    message: string,
-    isMatched: boolean
-):Step{
-    return {
-        array: [...array],
-        activeIndices: [...activeIndex],
-        target,
-        message,
-        isMatched
-    }
-};
+  array: number[],
+  activeIndex: number[],
+  target: number,
+  message: string,
+  isMatched: boolean,
+  currentLine: number
+): Step {
+  return {
+    array: [...array],
+    activeIndices: [...activeIndex],
+    target,
+    message,
+    isMatched,
+    currentLine,
+  };
+}
 
 export function twoPointerGenerator(
   arrayToSearch: number[],
@@ -146,7 +148,8 @@ export function twoPointerGenerator(
       [left, right],
       targetValue,
       "Initialize two pointers, Sorting the Array first",
-      false
+      false,
+      4
     )
   );
 
@@ -159,7 +162,8 @@ export function twoPointerGenerator(
         [left, right],
         targetValue,
         `Checking: ${sortedArray[left]} + ${sortedArray[right]} = ${sum}`,
-        false
+        false,
+        6
       )
     );
 
@@ -170,7 +174,8 @@ export function twoPointerGenerator(
           [left, right],
           targetValue,
           "Pair found",
-          true
+          true,
+          7
         )
       );
       return steps;
@@ -183,7 +188,8 @@ export function twoPointerGenerator(
           [left, right],
           targetValue,
           "Sum too small → move left pointer",
-          false
+          false,
+          8
         )
       );
       left++;
@@ -194,7 +200,8 @@ export function twoPointerGenerator(
           [left, right],
           targetValue,
           "Sum too large → move right pointer",
-          false
+          false,
+          9
         )
       );
       right--;
@@ -207,7 +214,8 @@ export function twoPointerGenerator(
       [-1],
       targetValue,
       "No pair found",
-      false
+      false,
+      11
     )
   );
 

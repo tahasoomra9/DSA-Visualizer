@@ -15,6 +15,7 @@ import { StepControls } from "@/components/visualizer/step-controls";
 import { ArrayVisualizer } from "@/components/visualizer/array-visualizer";
 import { InputSettings } from "@/components/visualizer/input-settings";
 import { ProblemLinksSection } from "@/components/visualizer/problem-links-section";
+import { CodeEditor } from "@/components/CodeEditor";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
   SidebarInset,
@@ -22,6 +23,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { ALGORITHM_DEFINITIONS, type AlgorithmKey } from "@/lib/algorithms";
+import { ALGORITHM_CODE_CONFIGS } from "@/lib/algorithm-code";
 import {
   TWO_POINTERS_DIFFICULTY_COLORS,
   TWO_POINTERS_PROBLEMS,
@@ -47,6 +49,8 @@ export default function Home() {
     [activeAlgorithm, finalArray, finalTarget]
   );
   const currentStep = steps[stepIndex];
+  const codeConfig = ALGORITHM_CODE_CONFIGS[selectedAlgorithm];
+  const currentCodeLine = codeConfig.getCurrentLine(currentStep);
 
   const handleAlgorithmSelect = (algorithm: AlgorithmKey) => {
     setSelectedAlgorithm(algorithm);
@@ -228,6 +232,12 @@ export default function Home() {
                   ? handleArrayValueSelect
                   : undefined
               }
+            />
+            <CodeEditor
+              title={`${activeAlgorithm.label}`}
+              code={codeConfig.code}
+              language={codeConfig.language}
+              currentLine={currentCodeLine}
             />
             <InputSettings
               draftArray={draftArray}

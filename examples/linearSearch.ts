@@ -80,42 +80,44 @@ export const LINEAR_SEARCH_PROBLEMS = [
  */
 
 function createStep(
-    array: number[],
-    activeIndex: number,
-    target: number,
-    message: string,
-    isMatched: boolean
-):Step{
-    return{
-        array: [...array],
-        activeIndices: [activeIndex],
-        target,
-        message,
-        isMatched,
-    }
-};
+  array: number[],
+  activeIndex: number,
+  target: number,
+  message: string,
+  isMatched: boolean,
+  currentLine: number
+): Step {
+  return {
+    array: [...array],
+    activeIndices: activeIndex >= 0 ? [activeIndex] : [],
+    target,
+    message,
+    isMatched,
+    currentLine,
+  };
+}
 
 export function linearSearchGenerator(arrayToSearch: number[], targetValue: number): Step[] {
-    const steps :Step[] = [];
-    
-    steps.push(createStep(arrayToSearch, -1, targetValue, "", false));
+  const steps: Step[] = [];
 
-    for (let i = 0; i < arrayToSearch.length; i += 1) {
-        const currNum = arrayToSearch[i];
-        let message = `Checking element ${currNum} at index ${i}`;
-        let isMatched = false;
+  steps.push(createStep(arrayToSearch, -1, targetValue, "", false, 1));
 
-        if (currNum === targetValue) {
-            message = `Target found at index ${i}`;
-            isMatched = true;
-            steps.push(createStep(arrayToSearch, i, targetValue, message, isMatched));
-            return steps;
-        }
-        steps.push(createStep(arrayToSearch, i, targetValue, message, isMatched));
+  for (let i = 0; i < arrayToSearch.length; i += 1) {
+    const currNum = arrayToSearch[i];
+    let message = `Checking element ${currNum} at index ${i}`;
+    let isMatched = false;
 
+    if (currNum === targetValue) {
+      message = `Target found at index ${i}`;
+      isMatched = true;
+      steps.push(createStep(arrayToSearch, i, targetValue, message, isMatched, 5));
+      return steps;
     }
 
-    steps.push(createStep(arrayToSearch, -1, targetValue, `Target Value ${targetValue} not found in array`, false));
-    return steps;
+    steps.push(createStep(arrayToSearch, i, targetValue, message, isMatched, 3));
+  }
+
+  steps.push(createStep(arrayToSearch, -1, targetValue, `Target Value ${targetValue} not found in array`, false, 8));
+  return steps;
 
 }

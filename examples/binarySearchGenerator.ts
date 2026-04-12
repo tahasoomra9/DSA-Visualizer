@@ -138,6 +138,7 @@ type BinaryStepPayload = {
     target: number;
     message: string;
     isMatched: boolean;
+    currentLine: number;
     low: number;
     mid: number;
     high: number;
@@ -167,6 +168,7 @@ function createStep({
     target,
     message,
     isMatched,
+    currentLine,
     low,
     mid,
     high,
@@ -180,6 +182,7 @@ function createStep({
         target,
         message,
         isMatched,
+        currentLine,
         low,
         mid,
         high,
@@ -243,6 +246,7 @@ function buildMoveLowState({
             target,
             message: `${midValue} < ${target}, eliminate left half and move low to ${nextLow}.`,
             isMatched: false,
+            currentLine: 8,
             low: nextLow,
             mid,
             high,
@@ -283,6 +287,7 @@ function buildMoveHighState({
             target,
             message: `${midValue} > ${target}, eliminate right half and move high to ${nextHigh}.`,
             isMatched: false,
+            currentLine: 9,
             low,
             mid,
             high: nextHigh,
@@ -306,6 +311,7 @@ export function binarySearchGenerator(arr: number[], target: number): Step[] {
                 target,
                 message: "Array is empty",
                 isMatched: false,
+                currentLine: 11,
                 low: 0,
                 mid: -1,
                 high: -1,
@@ -329,6 +335,7 @@ export function binarySearchGenerator(arr: number[], target: number): Step[] {
                 target,
                 message: "Binary search requires sorted input, so the array is shown in ascending order.",
                 isMatched: false,
+                currentLine: 2,
                 low,
                 mid: -1,
                 high,
@@ -351,6 +358,7 @@ export function binarySearchGenerator(arr: number[], target: number): Step[] {
                 target,
                 message: `mid = floor((${low} + ${high}) / 2) = ${mid}. Compare ${midValue} with ${target}.`,
                 isMatched: midValue === target,
+                currentLine: 6,
                 low,
                 mid,
                 high,
@@ -368,6 +376,7 @@ export function binarySearchGenerator(arr: number[], target: number): Step[] {
                     target,
                     message: `Target found at index ${mid}.`,
                     isMatched: true,
+                    currentLine: 7,
                     low,
                     mid,
                     high,
@@ -413,6 +422,7 @@ export function binarySearchGenerator(arr: number[], target: number): Step[] {
             target,
             message: `Target ${target} is not in the array.`,
             isMatched: false,
+            currentLine: 11,
             low,
             mid: -1,
             high,

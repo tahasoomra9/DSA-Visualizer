@@ -11,6 +11,7 @@ export type Step = {
     message: string;
     target: number;
     isMatched: boolean;
+    currentLine?: number;
     low?: number;
     mid?: number;
     high?: number;

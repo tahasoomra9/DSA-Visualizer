@@ -101,7 +101,8 @@ function createStep(
   activeIndices: number[],
   target: number,
   message: string,
-  isMatched: boolean
+  isMatched: boolean,
+  currentLine: number
 ): Step {
   return {
     array: [...array],
@@ -109,6 +110,7 @@ function createStep(
     target,
     message,
     isMatched,
+    currentLine,
   };
 }
 
@@ -132,7 +134,8 @@ export function slidingWindowGenerator(
       [],
       targetValue,
       "Initialize sliding window",
-      false
+      false,
+      2
     )
   );
 
@@ -143,7 +146,8 @@ export function slidingWindowGenerator(
         [],
         targetValue,
         "Array is empty",
-        false
+        false,
+        1
       )
     );
     return steps;
@@ -156,7 +160,8 @@ export function slidingWindowGenerator(
         [],
         targetValue,
         "Use non-negative numbers for this sliding window demo",
-        false
+        false,
+        1
       )
     );
     return steps;
@@ -174,7 +179,8 @@ export function slidingWindowGenerator(
         getWindowIndices(left, right),
         targetValue,
         `Expand window: add ${arrayToSearch[right]}, sum = ${sum}`,
-        false
+        false,
+        5
       )
     );
 
@@ -185,7 +191,8 @@ export function slidingWindowGenerator(
           getWindowIndices(left, right),
           targetValue,
           `Sum ${sum} is too large, remove ${arrayToSearch[left]} from left`,
-          false
+          false,
+          6
         )
       );
 
@@ -198,7 +205,8 @@ export function slidingWindowGenerator(
           getWindowIndices(left, right),
           targetValue,
           `Shrink window: sum = ${sum}`,
-          false
+          false,
+          8
         )
       );
     }
@@ -210,7 +218,8 @@ export function slidingWindowGenerator(
           getWindowIndices(left, right),
           targetValue,
           `Target sum found from index ${left} to ${right}`,
-          true
+          true,
+          10
         )
       );
       return steps;
@@ -223,7 +232,8 @@ export function slidingWindowGenerator(
       [],
       targetValue,
       `No contiguous subarray found with sum ${targetValue}`,
-      false
+      false,
+      12
     )
   );
 
